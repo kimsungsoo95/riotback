@@ -1,0 +1,39 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+}
+
+group = 'com.record'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'  // Spring MVC
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat' // 내장 Tomcat
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0' // ✅ Spring Boot 3.x용 서블릿 API
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // JSP 지원
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0' // JSTL 지원
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3' // MyBatis
+    runtimeOnly 'mysql:mysql-connector-java:8.0.33' // MySQL 드라이버
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
